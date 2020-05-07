@@ -80,8 +80,8 @@
             $(this.hash).hide();
         });
 
-        $(this).on('click', 'a', function(e) {
-            e.preventDefault();
+        $(this).on('click', 'a', function(event) {
+            event.preventDefault();
 
             $active.removeClass('active');
             $content.hide();
@@ -99,30 +99,30 @@
     });
 
     // story slider
-    // var owl = $('.owl-carousel');
+    var owl = $('.owl-carousel');
 
-    // owl.owlCarousel({
-    //     items: 1,
-    //     dots: false,
-    //     onInitialized: counter,
-    //     onTranslated: counter
-    // });
+    owl.owlCarousel({
+        items: 1,
+        dots: false,
+        onInitialized: counter,
+        onTranslated: counter
+    });
 
-    // function counter(e) {
-    //     var element = e.target;
-    //     var items = e.item.count;
-    //     var item = e.item.index + 1;
+    function counter(e) {
+        // var element = e.target;
+        var items = e.item.count;
+        var item = e.item.index + 1;
 
-    //     $('#counter').html(item + '/' + items);
-    // }
+        $('#counter').html(item + '/' + items);
+    }
 
-    // $('.prev-nav').click(function() {
-    //     owl.trigger('prev.owl.carousel', [300]);
-    // });
+    $('.prev-nav').click(function() {
+        owl.trigger('prev.owl.carousel', [300]);
+    });
 
-    // $('.next-nav').click(function() {
-    //     owl.trigger('next.owl.carousel');
-    // });
+    $('.next-nav').click(function() {
+        owl.trigger('next.owl.carousel');
+    });
 
     // dark mode
     var bodyLightMode = $('body');
@@ -168,7 +168,7 @@
     });
 
     // help button
-    $('.help-btn').click(function(e) {
+    $('.help-btn').click(function() {
         $('.help-cta--hold').toggleClass('display-cta');
     });
 
@@ -184,11 +184,11 @@
         adaptiveHeight: true
     });
 
-    $contentScroll.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+    $contentScroll.on('init reInit afterChange', function (event, slick, currentSlide) {
 
         var item = (currentSlide ? currentSlide : 0) + 1;
         $scrollCounter.text(item + '/' + slick.slideCount);
     });
 
 
-})(jQuery);
+})();
