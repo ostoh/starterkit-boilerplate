@@ -1,20 +1,14 @@
 @mixin font-awesome($f-icon) {
 	content: $f-icon;
-	font-family: 'Font Awesome 5 Free';
 	font-weight: 900;
 	font-style: normal;
 	font-variant: normal;
 }
 
-@mixin cover-background($img-uri) {
+@mixin hero-background($img-uri) {
 	background: url($img-uri) no-repeat;
 	background-size: cover;
 	background-position: top center;
-}
-
-@mixin header-background($img-uri) {
-	background: url($img-uri) no-repeat;
-	background-size: cover;
 }
 
 @mixin border-radius($values) {

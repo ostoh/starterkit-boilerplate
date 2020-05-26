@@ -62,6 +62,7 @@
          url('../fonts/futura_medium_bt-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap
 }
 
 @font-face {
@@ -70,6 +71,7 @@
          url('../fonts/futura_bold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap
 }
 
 $regularfont: 'futuramedium';

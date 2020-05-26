@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/ostoh/starterkit-boilerplate#readme",
   "scripts": {
-    "build": "gulp build",
+    "dev": "gulp build",
     "clean": "gulp clean"
   },
   "babel": {
@@ -34,6 +34,10 @@
     "cssnano": "^4.1.10",
     "del": "^5.1.0",
     "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.3",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-cache": "^1.1.3",
@@ -48,6 +52,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "node-sass": "^4.14.1",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "prettier": "^2.0.5"
   }
 }

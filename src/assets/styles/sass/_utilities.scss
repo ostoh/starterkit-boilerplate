@@ -7,28 +7,19 @@
     color: #888;
 }
 
-* {
-    box-sizing: border-box;
+:focus:not(:focus-visible) { 
+    outline: none 
 }
 
-.clear {
-
-    &::before,
-    &::after {
-        content: "";
-        display: table;
-    }
-
-    &::after {
-        clear: both;
-    }
+* {
+    box-sizing: border-box;
 }
 
 .border {
     outline: 1px solid red;
 }
 
-.display-none {
+.d-none {
     display: none;
 }
 
@@ -48,41 +39,41 @@
 /**********************************
 Position
 **********************************/
-.float-left {
+.f-lt {
     float: left;
 }
 
-.float-right {
+.f-rt {
     float: right;
 }
 
-.relative {
+.p-rel {
     position: relative;
 }
 
-.absolute {
+.p-abs {
     position: absolute;
 }
 
-.sticky {
+.p-stk {
     position: sticky;
     top: 0;
     z-index: 2;
 }
 
-.text-align-left {
+.txt-lt {
     text-align: left;
 }
 
-.text-align-right {
+.txt-rt {
     text-align: right;
 }
 
-.text-align-center {
+.txt-md {
     text-align: center;
 }
 
-.text-align-justify {
+.txt-js {
     text-align: justify;
 }
 
@@ -376,7 +367,11 @@ Grid System
     }
 }
 
-
+.f-height {
+    height: 100vh;
+    min-height: 100vh;
+    min-height: -webkit-fill-available
+}
 
 /**********************************
 Navigation
