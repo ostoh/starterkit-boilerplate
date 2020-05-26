@@ -7,7 +7,7 @@
     "url": "https://github.com/ostoh/starterkit-boilerplate.git"
   },
   "author": "Austin M <stnmwangi@gmail.com>",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/ostoh/starterkit-boilerplate/issues"
   },
@@ -20,10 +20,6 @@
     "presets": [
       "@babel/preset-env"
     ]
-  },
-  "engines": {
-    "node": ">=10",
-    "npm": ">=3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

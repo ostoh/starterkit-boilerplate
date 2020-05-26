@@ -30,7 +30,7 @@ const paths = {
     src: "src/assets/fonts/*",
     dest: "app/assets/fonts",
   },
-  destination: "app/*",
+  destination: "app/",
   maps: "/maps",
 };
 
