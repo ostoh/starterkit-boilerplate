@@ -1,9 +1,10 @@
-import { src, dest, watch, series, parallel, lastRun, task } from "gulp";
-import browserSync from "browser-sync";
-import del from "del";
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
-import loadPlugins from "gulp-load-plugins";
+// load globals
+const { src, dest, watch, series, parallel, lastRun, task } = require("gulp");
+const browserSync = require("browser-sync");
+const del = require("del");
+const autoprefixer = require("autoprefixer");
+const cssnano = require("cssnano");
+const loadPlugins = require("gulp-load-plugins");
 
 // load all plugins
 const $ = loadPlugins({ lazy: false });

@@ -3,7 +3,8 @@
     "env": {
         "browser": true,
         "es6": true,
-        "jquery": true
+        "jquery": true,
+        "commonjs": true
     },
     "extends": [
         "airbnb-base",
@@ -14,8 +15,8 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 11,
-        "sourceType": "module"
+        "ecmaVersion": 5,
+        "sourceType": "script"
     },
     "plugins": ["prettier"],
     "rules": {
