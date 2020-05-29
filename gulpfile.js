@@ -39,7 +39,7 @@ const paths = {
 const bs = browserSync.create();
 
 // clean assets folder
-export function clean() {
+function clean() {
   return del(paths.destination);
 }
 
@@ -59,7 +59,7 @@ const postCssPlugins = [
   cssnano(),
 ];
 
-export function styles() {
+function styles() {
   return src(paths.styles.src)
     .pipe($.sourcemaps.init())
     .pipe($.sass().on("error", $.sass.logError))
@@ -70,7 +70,7 @@ export function styles() {
     .pipe(bs.stream());
 }
 
-export function handleVendorCssFile() {
+function handleVendorCssFile() {
   return src([
     "node_modules/normalize.css/normalize.css",
     "src/assets/styles/vendor/*.css",
@@ -80,7 +80,7 @@ export function handleVendorCssFile() {
 }
 
 // scripts
-export function scripts() {
+function scripts() {
   return src("src/assets/scripts/vendor/*.js")
     .pipe($.sourcemaps.init())
     .pipe($.concat("libs.js"))
@@ -90,7 +90,7 @@ export function scripts() {
 }
 
 // handle main.js file
-export function handleMainJsFile() {
+function handleMainJsFile() {
   return src(paths.scripts.src)
     .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -101,7 +101,7 @@ export function handleMainJsFile() {
 }
 
 // lint scripts
-export function lint() {
+function lint() {
   return src(paths.scripts.src)
     .pipe(
       $.eslint({
@@ -113,7 +113,7 @@ export function lint() {
 }
 
 // images
-export function images() {
+function images() {
   return src(paths.images.src, { since: lastRun(images) })
     .pipe(
       $.cache(
@@ -132,19 +132,19 @@ export function images() {
 }
 
 // manage fonts
-export function fonts() {
+function fonts() {
   return src(paths.fonts.src, { since: lastRun(fonts) }).pipe(
     dest(paths.fonts.dest)
   );
 }
 
 // markup files
-export function copyMarkup() {
+function copyMarkup() {
   return src(paths.markup.src).pipe(dest(paths.markup.dest));
 }
 
 // watch file changes
-export function serve() {
+function serve() {
   bs.init({
     server: ["app", "src"],
     open: false,
@@ -183,4 +183,4 @@ const build = series(
 task("build", build);
 
 // default task to run on cli
-export default build;
+exports.default = build;
