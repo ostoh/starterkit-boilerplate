@@ -1,5 +1,8 @@
 {
-
+    "globals": {
+        "jQuery": "readonly",
+        "$": "readonly"
+    },
     "env": {
         "browser": true,
         "es6": true,
@@ -16,9 +19,8 @@
     },
     "plugins": ["prettier"],
     "rules": {
-        "prettier/prettier": "error",
+        "prettier/prettier": ["error", { "endOfLine": "auto" }],
         "semi": ["error", "always"],
         "quotes": ["error", "double"]
     }
-
 }
