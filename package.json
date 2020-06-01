@@ -1,25 +1,20 @@
 {
   "name": "starterkit-boilerplate",
   "version": "1.0.0",
-  "description": "A front-end template for building websites.",
+  "description": "A front-end boilerplate for building static websites with Gulp for task automation.",
   "repository": {
     "type": "git",
     "url": "https://github.com/ostoh/starterkit-boilerplate.git"
   },
   "author": "Austin M <stnmwangi@gmail.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ostoh/starterkit-boilerplate/issues"
   },
   "homepage": "https://github.com/ostoh/starterkit-boilerplate#readme",
   "scripts": {
-    "dev": "gulp build",
-    "clean": "gulp clean"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
+    "build": "gulp build",
+    "dev": "gulp dev"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -46,7 +41,6 @@
     "gulp-sass": "^4.1.0",
     "gulp-size": "^3.0.0",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp-uglify": "^3.0.2",
     "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
     "prettier": "^2.0.5"
