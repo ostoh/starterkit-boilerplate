@@ -13,15 +13,18 @@
   },
   "homepage": "https://github.com/ostoh/starterkit-boilerplate#readme",
   "scripts": {
-    "build": "gulp build",
-    "dev": "gulp dev"
+    "dev": "cross-env NODE_ENV=development gulp dev",
+    "build": "cross-env NODE_ENV=production gulp build",
+    "deploy": "cross-env NODE_ENV=production gulp deploy"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/register": "^7.9.0",
     "autoprefixer": "^9.7.6",
+    "babel-preset-minify": "^0.5.1",
     "browser-sync": "^2.26.7",
+    "cross-env": "^7.0.2",
     "cssnano": "^4.1.10",
     "del": "^5.1.0",
     "eslint": "^6.8.0",
@@ -35,6 +38,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^6.0.0",
     "gulp-flatten": "^0.4.0",
+    "gulp-if": "^3.0.0",
     "gulp-imagemin": "^7.1.0",
     "gulp-load-plugins": "^2.0.3",
     "gulp-postcss": "^8.0.0",
@@ -44,5 +48,6 @@
     "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
     "prettier": "^2.0.5"
-  }
+  },
+  "dependencies": {}
 }
