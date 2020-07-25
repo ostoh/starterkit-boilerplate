@@ -1,10 +1,3 @@
-@mixin font-awesome($f-icon) {
-	content: $f-icon;
-	font-weight: 900;
-	font-style: normal;
-	font-variant: normal;
-}
-
 @mixin hero-background($img-uri) {
 	background: url($img-uri) no-repeat;
 	background-size: cover;

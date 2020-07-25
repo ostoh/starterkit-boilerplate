@@ -1,11 +1,10 @@
 import { src, dest, watch, series, parallel, task } from "gulp";
 import browserSync from "browser-sync";
 import del from "del";
+import loadPlugins from "gulp-load-plugins";
 import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
-import loadPlugins from "gulp-load-plugins";
-
-// require("dotenv").config();
+import purgecss from "@fullhuman/postcss-purgecss";
 
 // load all gulp-* plugins in package.json
 const plugin = loadPlugins();
@@ -58,20 +57,17 @@ export function clean() {
 }
 
 // compatible styles
-const postCssPlugins = [
-  autoprefixer([
-    "ie >= 10",
-    "ie_mob >= 10",
-    "ff >= 30",
-    "chrome >= 34",
-    "safari >= 7",
-    "opera >= 23",
-    "ios >= 7",
-    "android >= 4.4",
-    "bb >= 10",
-  ]),
-  cssnano(),
-];
+const postCssPlugins = [autoprefixer(), cssnano()];
+
+if (prodEnv) {
+  postCssPlugins.push(
+    purgecss({
+      content: [paths.views.src, paths.scripts.src],
+      whitelist: ["html", "body"],
+      defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+    })
+  );
+}
 
 // main styles
 export function styles() {
