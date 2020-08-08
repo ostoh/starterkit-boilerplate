@@ -85,7 +85,6 @@ export function styles() {
 export function vendorStyles() {
   return src(paths.styles.vendor)
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.init()))
-    .pipe(plugin.postcss(postCssPlugins))
     .pipe(plugin.concat("libs.css"))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
     .pipe(dest(paths.styles.dist));
