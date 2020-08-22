@@ -4,9 +4,11 @@ A front-end boilerplate for rapid development on any web interface using [Tailwi
 
 `yarn install` to install dependencies 
 
-`yarn run dev` for development
+`yarn dev` for development
 
-`yarn run deploy` for production
+`yarn build` for production
+
+`yarn deploy` for production (excludes sourcemaps from the build)
 
 Working files are located in the `app` folder
 
