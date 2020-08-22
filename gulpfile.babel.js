@@ -1,10 +1,11 @@
-import { src, dest, watch, series, parallel, task } from "gulp";
-import browserSync from "browser-sync";
-import del from "del";
-import loadPlugins from "gulp-load-plugins";
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
-import purgecss from "@fullhuman/postcss-purgecss";
+import { src, dest, watch, series, parallel, task } from 'gulp';
+import browserSync from 'browser-sync';
+import del from 'del';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+import purgecss from '@fullhuman/postcss-purgecss';
+import loadPlugins from 'gulp-load-plugins';
 
 // load all gulp-* plugins in package.json
 const plugin = loadPlugins();
@@ -13,42 +14,35 @@ const plugin = loadPlugins();
 const bs = browserSync.create();
 
 // set environments
-const prodEnv = process.env.NODE_ENV === "production";
+const prodEnv = process.env.NODE_ENV === 'production';
 
 // paths
 const paths = {
   views: {
-    src: "app/views/**/*.html",
-    dist: "public/",
+    src: 'app/views/**/*.pug',
+    dist: 'public/',
   },
   styles: {
-    sass: "app/styles/sass/*.scss",
-    vendor: [
-      "app/styles/vendor/*.css",
-      "node_modules/normalize.css/normalize.css",
-    ],
-    dist: "public/styles/",
+    sass: 'app/styles/sass/*.scss',
+    vendor: ['app/styles/vendor/*.css'],
+    dist: 'public/styles/',
   },
   scripts: {
-    src: "app/scripts/js/**/*.js",
-    vendor: "app/scripts/vendor/*.js",
-    dist: "public/scripts/",
+    src: 'app/scripts/js/**/*.js',
+    vendor: 'app/scripts/vendor/*.js',
+    dist: 'public/scripts/',
   },
   images: {
-    src: "app/images/**/*",
-    dist: "public/images/",
+    src: 'app/images/**/*+(jpeg|jpg|png|gif|svg)',
+    dist: 'public/images/',
   },
   fonts: {
-    src: "app/fonts/*",
-    dist: "public/fonts/",
+    src: 'app/fonts/*',
+    dist: 'public/fonts/',
   },
-  configs: [
-    "app/apple-touch-icon.png",
-    "app/browserconfig.xml",
-    "app/manifest.json",
-  ],
-  dist: "public",
-  maps: "/maps",
+  configs: ['app/apple-touch-icon.png', 'app/browserconfig.xml', 'app/manifest.json'],
+  dist: 'public',
+  maps: '/maps',
 };
 
 // clean assets folder
@@ -57,13 +51,15 @@ export function clean() {
 }
 
 // compatible styles
-const postCssPlugins = [autoprefixer(), cssnano()];
+const postCssPlugins = [tailwindcss(), autoprefixer(), cssnano()];
 
 if (prodEnv) {
   postCssPlugins.push(
     purgecss({
       content: [paths.views.src, paths.scripts.src],
-      whitelist: ["html", "body"],
+      css: [paths.styles.sass],
+      whitelist: ['html', 'body'],
+      whitelistPatterns: [],
       defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
     })
   );
@@ -73,11 +69,11 @@ if (prodEnv) {
 export function styles() {
   return src(paths.styles.sass)
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.init()))
-    .pipe(plugin.sass().on("error", plugin.sass.logError))
+    .pipe(plugin.sass().on('error', plugin.sass.logError))
     .pipe(plugin.postcss(postCssPlugins))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
     .pipe(dest(paths.styles.dist))
-    .pipe(plugin.size({ title: "main styles" }))
+    .pipe(plugin.size({ title: 'main styles' }))
     .pipe(bs.stream());
 }
 
@@ -85,19 +81,21 @@ export function styles() {
 export function vendorStyles() {
   return src(paths.styles.vendor)
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.init()))
-    .pipe(plugin.concat("libs.css"))
+    .pipe(plugin.concat('libs.css'))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
-    .pipe(dest(paths.styles.dist));
+    .pipe(dest(paths.styles.dist))
+    .pipe(plugin.size({ title: 'vendor styles' }))
+    .pipe(bs.stream());
 }
 
 // vendor scripts
 export function vendorScripts() {
   return src(paths.scripts.vendor)
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.init()))
-    .pipe(plugin.concat("libs.js"))
+    .pipe(plugin.concat('libs.js'))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
     .pipe(dest(paths.scripts.dist))
-    .pipe(plugin.size({ title: "vendor scripts" }));
+    .pipe(plugin.size({ title: 'vendor scripts' }));
 }
 
 // main scripts
@@ -105,10 +103,10 @@ export function mainScripts() {
   return src(paths.scripts.src)
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.init()))
     .pipe(plugin.babel())
-    .pipe(plugin.concat("main.js"))
+    .pipe(plugin.concat('main.js'))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
     .pipe(dest(paths.scripts.dist))
-    .pipe(plugin.size({ title: "main scripts" }));
+    .pipe(plugin.size({ title: 'main scripts' }));
 }
 
 // lint main scripts
@@ -139,7 +137,7 @@ export function images() {
       )
     )
     .pipe(dest(paths.images.dist))
-    .pipe(plugin.size({ title: "images" }));
+    .pipe(plugin.size({ title: 'images' }));
 }
 
 // fonts
@@ -149,7 +147,13 @@ export function fonts() {
 
 // markup
 export function mainViews() {
-  return src(paths.views.src).pipe(dest(paths.views.dist));
+  return src('app/views/**/!(_)*.pug')
+    .pipe(
+      plugin.pug({
+        pretty: true,
+      })
+    )
+    .pipe(dest(paths.views.dist));
 }
 
 // app configs
@@ -166,35 +170,23 @@ export function watchFiles() {
   });
 
   watch(paths.styles.sass, series(styles));
-  watch(paths.scripts.vendor, series(vendorScripts)).on("change", bs.reload);
-  watch(paths.scripts.src, series(mainScripts, lintScripts)).on(
-    "change",
-    bs.reload
-  );
-  watch(paths.images.src, series(images)).on("change", bs.reload);
+  watch(paths.scripts.vendor, series(vendorScripts)).on('change', bs.reload);
+  watch(paths.scripts.src, series(mainScripts, lintScripts)).on('change', bs.reload);
+  watch(paths.images.src, series(images)).on('change', bs.reload);
   watch(paths.fonts.src, series(fonts));
-  watch(paths.views.src, series(mainViews)).on("change", bs.reload);
+  watch(paths.views.src, series(mainViews)).on('change', bs.reload);
   watch(paths.configs, series(appConfigs));
 }
 
 // tasks
 const build = series(
   clean,
-  parallel(
-    styles,
-    vendorStyles,
-    mainScripts,
-    vendorScripts,
-    images,
-    fonts,
-    mainViews,
-    appConfigs
-  )
+  parallel(styles, vendorStyles, mainScripts, vendorScripts, images, fonts, mainViews, appConfigs)
 );
-task("build", build);
+task('build', build);
 
 const develop = series(build, parallel(watchFiles));
-task("dev", develop);
+task('dev', develop);
 
 const deploy = series(build);
-task("deploy", deploy);
+task('deploy', deploy);

@@ -1,13 +1,15 @@
-@mixin hero-background($img-uri) {
-	background: url($img-uri) no-repeat;
-	background-size: cover;
-	background-position: top center;
+@mixin font-awesome($f-icon) {
+	content: $f-icon;
+	font-weight: 900;
+	font-style: normal;
+	font-variant: normal;
 }
 
-@mixin border-radius($values) {
-	border-radius: $values;
-}
+@mixin background-icon($icon-url, $icon-width, $icon-height) {
+	content: "";
+	background-image: url($icon-url);
+	width: $icon-width;
+	height: $icon-height;
 
-@mixin border-sizing($values) {
-	border-sizing: $values;
+	@apply .bg-no-repeat;
 }

@@ -1,5 +1,32 @@
-.transition {
-    transition: all .2s ease-out;
+@keyframes Shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.shake {
+  animation: Shake 1.3s cubic-bezier(.36,.07,.19,.97);
+  animation-iteration-count: infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 @keyframes wobbleV {
@@ -36,12 +63,12 @@
 
 @keyframes fadeInUp {
   0% {
-    opacity: 0;
+    @apply .opacity-0;
     transform: translate3d(0, 100%, 0);
   }
 
   to {
-    opacity: 1;
+    @apply .opacity-100;
   }
 }
 
@@ -51,77 +78,56 @@
 
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    @apply .opacity-0;
   }
 
   to {
-    opacity: 1;
+    @apply .opacity-100;
   }
 }
 
 .fadein {
-  animation: fadeIn 2s;
+  animation: fadeIn .4s;
+
+  &--body {
+    animation: fadeIn 3s !important;
+  }
 }
 
 @keyframes fadeOut {
   from {
-    opacity: 1;
+    @apply .opacity-100;
   }
 
   to {
-    opacity: 0;
+    @apply .opacity-0;
   }
 }
 
 .fadeout {
-  animation: fadeOut 2s;
+  animation: fadeOut .4s;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scaleX(1);
+@keyframes hvrPulse {
+  25% {
+    @apply .scale-110;
   }
 
-  50% {
-    transform: scale3d(1.2,1.2,1.2);
-  }
-
-  to {
-    transform: scaleX(1);
+  75% {
+    @apply .scale-90;
   }
 }
 
 .pulse {
-  animation: pulse 2s infinite;
+  animation: hvrPulse 2s linear infinite;
 }
 
-@keyframes shake {
-  10%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%,
-  80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%,
-  50%,
-  70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%,
-  60% {
-    transform: translate3d(4px, 0, 0);
-  }
+@keyframes FloatY {
+    from { transform: translate3d(0px, 0px, 0px);  }
+    to { transform: translate3d(1000px, 0px, 0px); }
 }
 
-.shake {
-  animation: shake 1.3s cubic-bezier(.36,.07,.19,.97);
-  animation-iteration-count: infinite;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+.float-y {
+  animation: FloatY 45s linear infinite;
+  transform-origin: -100%;
 }

@@ -1,25 +1,26 @@
 {
-    "globals": {
-        "jQuery": "readonly",
-        "$": "readonly"
-    },
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jquery": true,
-        "commonjs": true
-    },
-    "extends": [
-        "airbnb-base",
-        "prettier"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 6
-    },
-    "plugins": ["prettier"],
-    "rules": {
-        "prettier/prettier": ["error", { "endOfLine": "auto" }],
-        "semi": ["error", "always"],
-        "quotes": ["error", "double"]
-    }
+  "env": {
+    "es6": true
+  },
+  "extends": [
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "bracketSpacing": true,
+        "trailingComma": "es5",
+        "tabWidth": 2
+      }
+    ]
+  }
 }
