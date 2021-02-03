@@ -1,9 +1,12 @@
-import { src, dest, watch, series, parallel, task } from 'gulp';
+import { src, dest, lastRun, watch, series, parallel, task } from 'gulp';
 import browserSync from 'browser-sync';
 import del from 'del';
+import cssImport from 'postcss-import';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import cssvars from 'postcss-simple-vars';
+import nested from 'postcss-nested';
 import purgecss from '@fullhuman/postcss-purgecss';
 import loadPlugins from 'gulp-load-plugins';
 
@@ -23,8 +26,8 @@ const paths = {
     dist: 'public/',
   },
   styles: {
-    sass: 'app/styles/sass/*.scss',
-    vendor: ['app/styles/vendor/*.css'],
+    css: 'app/styles/css/**/*.css',
+    vendor: 'app/styles/vendor/*.css',
     dist: 'public/styles/',
   },
   scripts: {
@@ -40,7 +43,7 @@ const paths = {
     src: 'app/fonts/*',
     dist: 'public/fonts/',
   },
-  configs: ['app/apple-touch-icon.png', 'app/browserconfig.xml', 'app/manifest.json'],
+  configs: [],
   dist: 'public',
   maps: '/maps',
 };
@@ -51,29 +54,35 @@ export function clean() {
 }
 
 // compatible styles
-const postCssPlugins = [tailwindcss(), autoprefixer(), cssnano()];
+const postCssPlugins = [
+  cssImport(),
+  cssvars(),
+  nested(),
+  tailwindcss(),
+  autoprefixer(),
+];
 
 if (prodEnv) {
   postCssPlugins.push(
     purgecss({
       content: [paths.views.src, paths.scripts.src],
-      css: [paths.styles.sass],
+      css: [paths.styles.css],
       whitelist: ['html', 'body'],
       whitelistPatterns: [],
       defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
-    })
+    }),
+    cssnano({ preset: 'default' })
   );
 }
 
 // main styles
 export function styles() {
-  return src(paths.styles.sass)
+  return src(paths.styles.css)
+    .pipe(plugin.concat('main.css'))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.init()))
-    .pipe(plugin.sass().on('error', plugin.sass.logError))
     .pipe(plugin.postcss(postCssPlugins))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
     .pipe(dest(paths.styles.dist))
-    .pipe(plugin.size({ title: 'main styles' }))
     .pipe(bs.stream());
 }
 
@@ -84,7 +93,6 @@ export function vendorStyles() {
     .pipe(plugin.concat('libs.css'))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
     .pipe(dest(paths.styles.dist))
-    .pipe(plugin.size({ title: 'vendor styles' }))
     .pipe(bs.stream());
 }
 
@@ -94,8 +102,7 @@ export function vendorScripts() {
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.init()))
     .pipe(plugin.concat('libs.js'))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
-    .pipe(dest(paths.scripts.dist))
-    .pipe(plugin.size({ title: 'vendor scripts' }));
+    .pipe(dest(paths.scripts.dist));
 }
 
 // main scripts
@@ -105,60 +112,43 @@ export function mainScripts() {
     .pipe(plugin.babel())
     .pipe(plugin.concat('main.js'))
     .pipe(plugin.if(!prodEnv, plugin.sourcemaps.write(paths.maps)))
-    .pipe(dest(paths.scripts.dist))
-    .pipe(plugin.size({ title: 'main scripts' }));
-}
-
-// lint main scripts
-export function lintScripts() {
-  return src(paths.scripts.src)
-    .pipe(
-      plugin.eslint({
-        useEslintrc: true,
-      })
-    )
-    .pipe(plugin.eslint.format())
-    .pipe(plugin.eslint.failAfterError());
+    .pipe(dest(paths.scripts.dist));
 }
 
 // images
 export function images() {
-  return src(paths.images.src)
+  return src(paths.images.src, { since: lastRun(images) })
+    .pipe(plugin.cached(images))
     .pipe(
-      plugin.cache(
-        plugin.imagemin([
-          plugin.imagemin.gifsicle({ interlaced: true }),
-          plugin.imagemin.mozjpeg({ quality: 100 }),
-          plugin.imagemin.optipng({ optimizationLevel: 5 }),
-          plugin.imagemin.svgo({
-            plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
-          }),
-        ])
-      )
+      plugin.imagemin([
+        plugin.imagemin.gifsicle({ interlaced: true }),
+        plugin.imagemin.mozjpeg({ quality: 100 }),
+        plugin.imagemin.optipng({ optimizationLevel: 5 }),
+        plugin.imagemin.svgo({
+          plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
+        }),
+      ])
     )
-    .pipe(dest(paths.images.dist))
-    .pipe(plugin.size({ title: 'images' }));
+    .pipe(dest(paths.images.dist));
 }
 
 // fonts
 export function fonts() {
-  return src(paths.fonts.src).pipe(dest(paths.fonts.dist));
+  return src(paths.fonts.src, { since: lastRun(fonts) })
+    .pipe(plugin.cached(fonts))
+    .pipe(dest(paths.fonts.dist));
 }
 
 // markup
 export function mainViews() {
-  return src('app/views/**/!(_)*.pug')
+  return src('app/views/**/!(_)*.pug', { since: lastRun(mainViews) })
+    .pipe(plugin.cached(mainViews))
     .pipe(
       plugin.pug({
         pretty: true,
       })
     )
     .pipe(dest(paths.views.dist));
-}
-
-// app configs
-export function appConfigs() {
-  return src(paths.configs).pipe(dest(paths.dist));
 }
 
 // watch file changes
@@ -169,19 +159,26 @@ export function watchFiles() {
     notify: false,
   });
 
-  watch(paths.styles.sass, series(styles));
+  watch(paths.styles.css, series(styles));
   watch(paths.scripts.vendor, series(vendorScripts)).on('change', bs.reload);
-  watch(paths.scripts.src, series(mainScripts, lintScripts)).on('change', bs.reload);
+  watch(paths.scripts.src, series(mainScripts)).on('change', bs.reload);
   watch(paths.images.src, series(images)).on('change', bs.reload);
   watch(paths.fonts.src, series(fonts));
   watch(paths.views.src, series(mainViews)).on('change', bs.reload);
-  watch(paths.configs, series(appConfigs));
 }
 
 // tasks
 const build = series(
   clean,
-  parallel(styles, vendorStyles, mainScripts, vendorScripts, images, fonts, mainViews, appConfigs)
+  parallel(
+    styles,
+    vendorStyles,
+    mainScripts,
+    vendorScripts,
+    images,
+    fonts,
+    mainViews
+  )
 );
 task('build', build);
 

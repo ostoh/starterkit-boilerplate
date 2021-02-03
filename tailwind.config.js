@@ -1,24 +1,13 @@
-const { colors } = require('tailwindcss/defaultTheme');
-
 module.exports = {
-  important: true,
-  purge: false,
   separator: '_',
+  purge: false,
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    colors: {
-      transparent: colors.transparent,
-      black: colors.black,
-      white: colors.white,
-      gray: colors.gray,
-      red: colors.red,
-      primary: 'var(--color-primary)',
-      secondary: 'var(--color-secondary)',
-    },
     extend: {
       width: {
         '1o2': '50%',
-        '1o3': '33.33333%',
-        '2o3': '66.66667%',
+        '1o3': '33.333333%',
+        '2o3': '66.666667%',
         '1o4': '25%',
         '2o4': '50%',
         '3o4': '75%',
@@ -26,15 +15,27 @@ module.exports = {
         '2o5': '40%',
         '3o5': '60%',
         '4o5': '80%',
-        '1o6': '16.66667%',
-        '2o6': '33.33333%',
+        '1o6': '16.666667%',
+        '2o6': '33.333333%',
         '3o6': '50%',
-        '4o6': '66.66667%',
-        '5o6': '83.33333%',
+        '4o6': '66.666667%',
+        '5o6': '83.333333%',
+        '1o12': '8.333333%',
+        '2o12': '16.666667%',
+        '3o12': '25%',
+        '4o12': '33.333333%',
+        '5o12': '41.666667%',
+        '6o12': '50%',
+        '7o12': '58.333333%',
+        '8o12': '66.666667%',
+        '9o12': '75%',
+        '10o12': '83.333333%',
+        '11o12': '91.666667%',
       },
     },
   },
   variants: {
-    margin: ['responsive', 'first', 'last', 'even', 'odd', 'hover', 'focus'],
+    extend: {},
   },
+  plugins: [],
 };
