@@ -16,12 +16,12 @@ Working files are located in the `app` folder
 
 1. PostCSS
 
-[autoprefixer](https://github.com/postcss/autoprefixer) - Ship browser-compatible CSS.
-[cssnano](https://github.com/cssnano/cssnano) - Minify CSS on final build.
-[postcss-import](https://github.com/postcss/postcss-import) - Handles `@imports` on CSS files.
-[postcss-nested](https://github.com/postcss/postcss-nested) - For Sass-like nesting and unwraps for the final build.
-[postcss-simple-vars](https://github.com/postcss/postcss-simple-vars) - For Sass-like way of declaring variables.
-[@fullhuman/postcss-purgecss](https://github.com/FullHuman/purgecss) - Don't ship unused CSS.
+- [autoprefixer](https://github.com/postcss/autoprefixer) - Ship browser-compatible CSS.
+- [cssnano](https://github.com/cssnano/cssnano) - Minify CSS on final build.
+- [postcss-import](https://github.com/postcss/postcss-import) - Handles `@imports` on CSS files.
+- [postcss-nested](https://github.com/postcss/postcss-nested) - For Sass-like nesting and unwraps for the final build.
+- [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars) - For Sass-like way of declaring variables.
+- [@fullhuman/postcss-purgecss](https://github.com/FullHuman/purgecss) - Don't ship unused CSS.
 
 2. Tailwind CSS
 3. Gulp
