@@ -18,15 +18,15 @@
     "deploy": "cross-env NODE_ENV=production gulp deploy"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "@babel/register": "^7.12.13",
-    "@fullhuman/postcss-purgecss": "^4.0.0",
-    "autoprefixer": "^10.2.4",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/register": "^7.13.16",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "autoprefixer": "^10.2.5",
     "babel-preset-minify": "^0.5.1",
     "browser-sync": "^2.26.14",
     "cross-env": "^7.0.3",
-    "cssnano": "^4.1.10",
+    "cssnano": "^5.0.1",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
@@ -38,11 +38,11 @@
     "gulp-postcss": "^9.0.0",
     "gulp-pug": "^4.0.1",
     "gulp-sourcemaps": "^3.0.0",
-    "postcss": "^8.2.4",
-    "postcss-import": "^14.0.0",
-    "postcss-nested": "^5.0.3",
-    "postcss-simple-vars": "^6.0.2",
-    "tailwindcss": "^2.0.2"
+    "postcss": "^8.2.10",
+    "postcss-import": "^14.0.1",
+    "postcss-nested": "^5.0.5",
+    "postcss-simple-vars": "^6.0.3",
+    "tailwindcss": "^2.1.1"
   },
   "dependencies": {}
 }
