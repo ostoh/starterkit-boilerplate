@@ -1,1 +1,1 @@
-// main js file
+(($) => {})(jQuery);

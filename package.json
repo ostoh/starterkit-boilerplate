@@ -1,48 +1,46 @@
 {
-  "name": "starterkit-boilerplate",
-  "version": "1.0.2",
-  "description": "A front-end boilerplate for rapid development on any web interface.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ostoh/starterkit-boilerplate.git"
-  },
-  "author": "Austine Mwangi <austinemwangi@outlook.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ostoh/starterkit-boilerplate/issues"
-  },
-  "homepage": "https://github.com/ostoh/starterkit-boilerplate#readme",
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development gulp dev",
-    "build": "cross-env NODE_ENV=production gulp build",
-    "deploy": "cross-env NODE_ENV=production gulp deploy"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.13.16",
-    "@babel/preset-env": "^7.13.15",
-    "@babel/register": "^7.13.16",
-    "@fullhuman/postcss-purgecss": "^4.0.3",
-    "autoprefixer": "^10.2.5",
-    "babel-preset-minify": "^0.5.1",
-    "browser-sync": "^2.26.14",
-    "cross-env": "^7.0.3",
-    "cssnano": "^5.0.1",
-    "del": "^6.0.0",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
-    "gulp-cached": "^1.1.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-if": "^3.0.0",
-    "gulp-imagemin": "^7.1.0",
-    "gulp-load-plugins": "^2.0.6",
-    "gulp-postcss": "^9.0.0",
-    "gulp-pug": "^4.0.1",
-    "gulp-sourcemaps": "^3.0.0",
-    "postcss": "^8.2.10",
-    "postcss-import": "^14.0.1",
-    "postcss-nested": "^5.0.5",
-    "postcss-simple-vars": "^6.0.3",
-    "tailwindcss": "^2.1.1"
-  },
-  "dependencies": {}
+    "name": "starterkit-boilerplate",
+    "version": "1.0.2",
+    "description": "A front-end boilerplate for rapid development on any web interface.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ostoh/starterkit-boilerplate.git"
+    },
+    "author": "Austine Mwangi <austinemwangi@outlook.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ostoh/starterkit-boilerplate/issues"
+    },
+    "homepage": "https://github.com/ostoh/starterkit-boilerplate#readme",
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development gulp dev",
+        "build": "cross-env NODE_ENV=production gulp build",
+        "deploy": "cross-env NODE_ENV=production gulp deploy"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.14.3",
+        "@babel/preset-env": "^7.14.2",
+        "@babel/register": "^7.13.16",
+        "autoprefixer": "^10.2.5",
+        "babel-preset-minify": "^0.5.1",
+        "browser-sync": "^2.26.14",
+        "cross-env": "^7.0.3",
+        "cssnano": "^5.0.3",
+        "del": "^6.0.0",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-cached": "^1.1.1",
+        "gulp-concat": "^2.6.1",
+        "gulp-if": "^3.0.0",
+        "gulp-imagemin": "^7.1.0",
+        "gulp-load-plugins": "^2.0.6",
+        "gulp-postcss": "^9.0.0",
+        "gulp-pug": "^4.0.1",
+        "gulp-sourcemaps": "^3.0.0",
+        "postcss": "^8.2.15",
+        "postcss-import": "^14.0.2",
+        "postcss-nested": "^5.0.5",
+        "postcss-simple-vars": "^6.0.3"
+    },
+    "dependencies": {}
 }
