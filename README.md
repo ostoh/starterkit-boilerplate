@@ -24,6 +24,9 @@ Working files are located in the `app` folder
 
 2. Gulp
 3. Babel
-4. Pug
+4. [Pug](https://pugjs.org/api/getting-started.html)
+5. [Font Awesome](https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free)
+
+Also to mention that this has been heavily inspired by [Web Starter Kit](https://github.com/google/web-starter-kit/).
 
 Copyright (c) 2021 **Austine Mwangi** Licensed under the MIT License.
