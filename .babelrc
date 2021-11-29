@@ -1,7 +1,6 @@
 {
+  "comments": false,
   "presets": ["@babel/preset-env"],
-  "only": "gulpfile.babel.js",
-  "retainLines": true
   "env": {
     "production": {
       "presets": ["minify"]

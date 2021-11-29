@@ -118,6 +118,7 @@ export function images() {
         }),
         plugin.imagemin.mozjpeg({
           quality: 100,
+          progressive: true,
         }),
         plugin.imagemin.optipng({
           optimizationLevel: 5,
