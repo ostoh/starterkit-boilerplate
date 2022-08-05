@@ -1,32 +1,33 @@
 ## Starterkit Boilerplate
 
-A front-end boilerplate for rapid development on any web interface using [PostCSS](https://postcss.org/), [Pug](https://pugjs.org/) (templating), [Babel](https://babeljs.io/) and [Gulp](https://gulpjs.com/) (task automation).
+A front-end boilerplate for rapid development on any web interface using [SASS](https://sass-lang.com/documentation/), [Pug](https://pugjs.org/) (templating), [Babel](https://babeljs.io/) and [Gulp](https://gulpjs.com/) (task automation).
 
-`npm i` to install dependencies
+`yarn` to install dependencies
 
-`npm run dev` for development
+`yarn dev` for development
 
-`npm run build` for production
+`yarn build` for production
 
-`npm run deploy` for production (w/o sourcemaps)
+`yarn deploy` for production (w/o sourcemaps)
 
 Working files are located in the `app` folder
 
 ### Under the hood:
 
-1. PostCSS
+1. SASS
 
-- [autoprefixer](https://github.com/postcss/autoprefixer) - Ship browser-compatible CSS.
-- [cssnano](https://github.com/cssnano/cssnano) - Minify CSS on final build.
-- [postcss-import](https://github.com/postcss/postcss-import) - Handles `@imports` on CSS files.
-- [postcss-nested](https://github.com/postcss/postcss-nested) - For Sass-like nesting and unwraps for the final build.
-- [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars) - For Sass-like way of declaring variables.
+-   base - general classes eg h1,h2 etc
+-   components - component classes eg. buttons, carousels, navs etc
+-   layouts - page layouts that form structure eg. footer, header etc
+-   pages - page structure classes eg. services page
+-   utilities - utility classes. eg variables, custom properties etc
+-   vendors - external libraries.
 
 2. Gulp
 3. Babel
 4. [Pug](https://pugjs.org/api/getting-started.html)
-5. [Font Awesome](https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free)
+5. [IcoMoon](https://icomoon.io/app/#/select)
 
 Also to mention that this has been heavily inspired by [Web Starter Kit](https://github.com/google/web-starter-kit/).
 
-Copyright (c) 2021 **Austine Mwangi** Licensed under the MIT License.
+Copyright (c) 2022 **Austine Mwangi** Licensed under the MIT License.

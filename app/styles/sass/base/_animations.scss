@@ -1,0 +1,113 @@
+* {
+    transition: .3s all ease-in;
+}
+@keyframes wobbleV {
+    16.65% {
+        transform: translateY(6px);
+    }
+    33.3% {
+        transform: translateY(-5px);
+    }
+    49.95% {
+        transform: translateY(4px);
+    }
+    66.6% {
+        transform: translateY(-2px);
+    }
+    83.25% {
+        transform: translateY(1px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.wobble-vertical {
+    animation-name: wobbleV;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+    }
+    to {
+        opacity: 1;
+    }
+}
+.fadeinup {
+    animation: fadeInUp 2s;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.fadein {
+    animation: fadeIn .4s;
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.fadeout {
+    animation: fadeOut .4s;
+}
+@keyframes pulse {
+    0% {
+        transform: scaleX(1);
+    }
+    50% {
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+.pulse {
+    animation: pulse 2s infinite;
+}
+@keyframes shake {
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+.shake {
+    animation: shake 1.3s cubic-bezier(.36, .07, .19, .97);
+    animation-iteration-count: infinite;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+@keyframes twink {
+    from {
+        transform: translate3d(0px, 0px, 0px);
+    }
+    to {
+        transform: translate3d(1000px, 0px, 0px);
+    }
+}
+.twinkling {
+    animation: twink 5s linear infinite;
+}
